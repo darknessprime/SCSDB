@@ -2,65 +2,120 @@
 @tailwind components;
 @tailwind utilities;
 
-/* primary - #1F1E24 */
-/* secondary - #6556CD */
+:root {
+    --primary: #1F1E24;
+    --secondary: #6556CD;
+    --secondary-dark: #5446B8;
+    --dark: #16151A;
+    --light: #F8F9FA;
+}
 
+body {
+    @apply font-sans bg-primary text-light;
+    overflow-x: hidden;
+}
+
+/* Scrollbar styling */
 ::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-dark rounded-full;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #49494c;
-    border-radius: 10px;
+    @apply bg-zinc-600 rounded-full transition-all duration-300;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #6556cd;
-    border-radius: 10px;
+    @apply bg-secondary;
 }
 
+/* Custom select styling */
 select {
     -webkit-appearance: none;
     -moz-appearance: none;
-    -ms-appearance: none;
     appearance: none;
     outline: 0;
     box-shadow: none;
     border: 0 !important;
-    background: #27272a;
-    background-image: none;
-    flex: 1;
-    padding: 0 0.5em;
-    color: #fff;
-    cursor: pointer;
-    font-size: 1em;
-    font-family: "Open Sans", sans-serif;
+    @apply bg-dark text-light cursor-pointer py-2 px-4 rounded-lg font-medium;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='292.4' height='292.4'%3E%3Cpath fill='%23FFFFFF' d='M287 69.4a17.6 17.6 0 0 0-13-5.4H18.4c-5 0-9.3 1.8-12.9 5.4A17.6 17.6 0 0 0 0 82.2c0 5 1.8 9.3 5.4 12.9l128 127.9c3.6 3.6 7.8 5.4 12.8 5.4s9.2-1.8 12.8-5.4L287 95c3.5-3.5 5.4-7.8 5.4-12.8 0-5-1.9-9.2-5.5-12.8z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem top 50%;
+    background-size: 0.65rem auto;
 }
-select::-ms-expand {
-    display: none;
-}
+
 .select {
-    position: relative;
-    display: flex;
-    width: 20em;
-    height: 3em;
-    line-height: 3;
-    background: #27272a;
-    overflow: hidden;
-    border-radius: 0.25em;
+    @apply relative flex w-48 rounded-lg overflow-hidden shadow-md transition-all duration-300;
 }
-.select::after {
-    content: "\25BC";
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0 1em;
-    background: #27272a;
-    cursor: pointer;
-    pointer-events: none;
-    transition: 0.25s all ease;
+
+.select:hover {
+    @apply shadow-lg;
 }
-.select:hover::after {
-    color: #6556cd;
+
+/* Component styles */
+@layer components {
+    .card {
+        @apply bg-dark rounded-xl overflow-hidden shadow-card transition-all duration-300;
+    }
+    
+    .card:hover {
+        @apply shadow-hover transform -translate-y-1;
+    }
+    
+    .btn {
+        @apply px-4 py-2 rounded-lg font-medium transition-all duration-300;
+    }
+    
+    .btn-primary {
+        @apply bg-secondary text-white shadow-button hover:bg-secondary-dark;
+    }
+    
+    .nav-link {
+        @apply flex items-center gap-2 px-4 py-3 rounded-lg transition-all duration-300;
+    }
+    
+    .nav-link-active {
+        @apply bg-secondary text-white;
+    }
+    
+    .movie-title {
+        @apply font-bold text-xl mb-2;
+    }
+    
+    .section-title {
+        @apply text-2xl font-bold mb-4;
+    }
+    
+    .badge {
+        @apply px-2 py-1 rounded-full text-xs font-semibold;
+    }
+    
+    .rating-badge {
+        @apply bg-accent-yellow text-dark rounded-full flex items-center justify-center;
+    }
+}
+
+/* Animation utilities */
+@layer utilities {
+    .animate-fade-in {
+        animation: fadeIn 0.5s ease-in-out;
+    }
+    
+    .animate-slide-up {
+        animation: slideUp 0.5s ease-out;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes slideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
 }
