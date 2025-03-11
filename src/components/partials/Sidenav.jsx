@@ -9,7 +9,7 @@ const Sidenav = () => {
     };
 
     return (
-        <div className="w-[20%] h-full bg-dark p-6 flex flex-col">
+        <div className="hidden md:flex w-[20%] h-full bg-dark p-6 flex-col">
             <Link to="/" className="flex items-center gap-2 mb-10">
                 <i className="text-accent-purple text-2xl ri-tv-fill"></i>
                 <span className="text-2xl font-bold text-white">SCSDB.</span>

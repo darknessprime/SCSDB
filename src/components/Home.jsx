@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom"; // Add missing import
 import Sidenav from "./partials/Sidenav";
 import Topnav from "./partials/Topnav";
 import axios from "../utils/axios";
@@ -39,25 +40,38 @@ const Home = () => {
     }, [category]);
 
     return wallpaper && trending ? (
-        <>
+        <div className="flex w-full h-full content-container">
             <Sidenav />
-            <div className="w-[80%] h-full overflow-auto overflow-x-hidden">
-                <Topnav />
-                <Header data={wallpaper} />
-                <div className="flex justify-between p-5">
-                    <h1 className="text-3xl font-semibold text-zinc-400">
-                        Trending
-                    </h1>
+            <div className="w-full md:w-[80%] h-full overflow-auto overflow-x-hidden">
+                <div className="px-4 md:px-6 pt-4 pb-8 md:pt-6">
+                    <div className="flex items-center justify-between mb-6">
+                        <div className="md:hidden">
+                            <Link to="/" className="flex items-center gap-2">
+                                <i className="text-accent-purple text-xl ri-tv-fill"></i>
+                                <span className="text-xl font-bold text-white">SCSDB</span>
+                            </Link>
+                        </div>
+                        <Topnav />
+                    </div>
+                    
+                    <Header data={wallpaper} />
+                    
+                    <div className="flex flex-wrap md:flex-nowrap justify-between items-center p-4 md:p-5">
+                        <h1 className="text-2xl md:text-3xl font-semibold text-zinc-400 w-full md:w-auto mb-3 md:mb-0">
+                            Trending
+                        </h1>
 
-                    <Dropdown
-                        title="Filter"
-                        options={["tv", "movie", "all"]}
-                        func={(e) => setcategory(e.target.value)}
-                    />
+                        <Dropdown
+                            title="Filter"
+                            options={["tv", "movie", "all"]}
+                            func={(e) => setcategory(e.target.value)}
+                        />
+                    </div>
+                    
+                    <HorizontalCards data={trending} title={category} />
                 </div>
-                <HorizontalCards data={trending} />
             </div>
-        </>
+        </div>
     ) : (
         <Loading />
     );

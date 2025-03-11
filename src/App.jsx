@@ -1,6 +1,7 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Loading from "./components/Loading";
+import MobileNav from "./components/partials/MobileNav";
 
 // Lazy load components for better performance
 const Home = lazy(() => import("./components/Home"));
@@ -16,6 +17,9 @@ const Trailer = lazy(() => import("./components/partials/Trailer"));
 const NotFound = lazy(() => import("./components/NotFound"));
 
 const App = () => {
+    const location = useLocation();
+    const isDetailsPage = location.pathname.includes('/details/');
+    
     return (
         <div className="bg-primary w-screen h-screen flex overflow-hidden">
             <Suspense fallback={<Loading />}>
@@ -35,6 +39,7 @@ const App = () => {
                     <Route path="/person/details/:id" element={<PersonDetails />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
+                {!isDetailsPage && <MobileNav />}
             </Suspense>
         </div>
     );

@@ -49,11 +49,26 @@ select {
 }
 
 .select {
-    @apply relative flex w-48 rounded-lg overflow-hidden shadow-md transition-all duration-300;
+    @apply relative flex w-36 md:w-48 rounded-lg overflow-hidden shadow-md transition-all duration-300;
 }
 
 .select:hover {
     @apply shadow-lg;
+}
+
+/* Hide scrollbar for mobile devices */
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-smooth {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Component styles */
@@ -96,6 +111,36 @@ select {
     
     .rating-badge {
         @apply bg-accent-yellow text-dark rounded-full flex items-center justify-center;
+    }
+    
+    .mobile-menu {
+        @apply fixed bottom-0 left-0 w-full bg-dark py-2 px-4 flex justify-around items-center z-50 shadow-lg md:hidden;
+    }
+    
+    .mobile-menu-item {
+        @apply flex flex-col items-center text-xs text-zinc-400;
+    }
+    
+    .mobile-menu-item.active {
+        @apply text-secondary;
+    }
+    
+    .mobile-menu-icon {
+        @apply text-lg mb-1;
+    }
+    
+    .content-container {
+        @apply pb-16 md:pb-0;
+    }
+    
+    /* Additional desktop navigation styles */
+    .desktop-scroll-control {
+        @apply hidden md:flex absolute top-1/2 -translate-y-1/2 bg-dark/70 hover:bg-secondary text-white w-10 h-10 rounded-full items-center justify-center z-10 transition-all duration-300;
+    }
+    
+    /* Desktop navigation layout */
+    .desktop-layout {
+        @apply hidden md:flex md:items-center md:gap-6;
     }
 }
 
